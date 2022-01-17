@@ -4,7 +4,7 @@ pragma solidity >=0.5.0 <0.9.0;
 
 import "./ITaskToken.sol";
 
-contract TaskToken is IERC20, dAppConfig {
+contract TaskToken is IERC20 {
     uint256 constant private MAX_UINT256 = 2**256 - 1;
     mapping (address => uint256) public balances;
     mapping (address => mapping (address => uint256)) public allowed;
@@ -39,6 +39,11 @@ contract TaskToken is IERC20, dAppConfig {
         balances[address(this)] = totalSupply - balances[msg.sender];
         tokenOfferCotation = 10**12 wei; // 0,000001 ether, ou R$0,02
     }
+
+    
+    event SignedUpUser(address indexed _user, string _username);
+    event NewTaskInStaking(uint256 indexed _taskId, address indexed _owner);
+    event TaskDeletedFromStaking(uint256 indexed _taskId, address indexed _finisher);
 
 
     //======= TOKEN P2P TRASFERS =======// 
